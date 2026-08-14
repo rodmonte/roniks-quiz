@@ -1,0 +1,602 @@
+[
+  {
+    "id": "q001",
+    "category": "General Knowledge",
+    "question": "Which element has the chemical symbol W?",
+    "options": [
+      "Tungsten",
+      "Tin",
+      "Titanium",
+      "Tantalum"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": "q002",
+    "category": "General Knowledge",
+    "question": "Which is the only mammal capable of true sustained flight?",
+    "options": [
+      "Flying squirrel",
+      "Sugar glider",
+      "Bat",
+      "Colugo"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": "q003",
+    "category": "General Knowledge",
+    "question": "The ancient city of Petra is located in which present-day country?",
+    "options": [
+      "Egypt",
+      "Jordan",
+      "Lebanon",
+      "Syria"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": "q004",
+    "category": "General Knowledge",
+    "question": "Which scientist formulated the three laws of planetary motion?",
+    "options": [
+      "Galileo Galilei",
+      "Isaac Newton",
+      "Johannes Kepler",
+      "Tycho Brahe"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": "q005",
+    "category": "General Knowledge",
+    "question": "Which blood type is known as the universal red-cell donor?",
+    "options": [
+      "AB positive",
+      "O positive",
+      "O negative",
+      "AB negative"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": "q006",
+    "category": "General Knowledge",
+    "question": "What is the smallest prime number greater than 50?",
+    "options": [
+      "51",
+      "53",
+      "57",
+      "59"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": "q007",
+    "category": "General Knowledge",
+    "question": "Which ocean current is primarily responsible for warming western Europe?",
+    "options": [
+      "California Current",
+      "Canary Current",
+      "Gulf Stream",
+      "Labrador Current"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": "q008",
+    "category": "General Knowledge",
+    "question": "In Greek mythology, who was condemned to push a boulder uphill for eternity?",
+    "options": [
+      "Tantalus",
+      "Sisyphus",
+      "Icarus",
+      "Orpheus"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": "q009",
+    "category": "General Knowledge",
+    "question": "Which country gifted the Statue of Liberty to the United States?",
+    "options": [
+      "France",
+      "Spain",
+      "Italy",
+      "Belgium"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": "q010",
+    "category": "General Knowledge",
+    "question": "What is the longest bone in the human body?",
+    "options": [
+      "Tibia",
+      "Humerus",
+      "Femur",
+      "Radius"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": "q011",
+    "category": "Pop Quiz",
+    "question": "Which artist released the 2016 album Lemonade?",
+    "options": [
+      "Rihanna",
+      "Beyoncé",
+      "Adele",
+      "Lady Gaga"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": "q012",
+    "category": "Pop Quiz",
+    "question": "In the Harry Potter series, what is the name of Harry's owl?",
+    "options": [
+      "Crookshanks",
+      "Hedwig",
+      "Scabbers",
+      "Fawkes"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": "q013",
+    "category": "Pop Quiz",
+    "question": "Which actor played Tony Stark in the Marvel Cinematic Universe?",
+    "options": [
+      "Chris Evans",
+      "Chris Hemsworth",
+      "Robert Downey Jr.",
+      "Mark Ruffalo"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": "q014",
+    "category": "Pop Quiz",
+    "question": "Which television series features the fictional continent of Westeros?",
+    "options": [
+      "The Witcher",
+      "Game of Thrones",
+      "Vikings",
+      "The Last Kingdom"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": "q015",
+    "category": "Pop Quiz",
+    "question": "Which singer's real name is Stefani Germanotta?",
+    "options": [
+      "Katy Perry",
+      "Lady Gaga",
+      "P!nk",
+      "Demi Lovato"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": "q016",
+    "category": "Pop Quiz",
+    "question": "Which film won the Academy Award for Best Picture at the 2020 ceremony?",
+    "options": [
+      "1917",
+      "Joker",
+      "Parasite",
+      "Once Upon a Time in Hollywood"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": "q017",
+    "category": "Pop Quiz",
+    "question": "Which band released the album A Night at the Opera?",
+    "options": [
+      "The Beatles",
+      "Queen",
+      "The Rolling Stones",
+      "Pink Floyd"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": "q018",
+    "category": "Pop Quiz",
+    "question": "In the sitcom Friends, what is Chandler Bing's middle name?",
+    "options": [
+      "Muriel",
+      "Michael",
+      "Matthew",
+      "Mark"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": "q019",
+    "category": "Pop Quiz",
+    "question": "Which singer had a major hit with the song Blinding Lights?",
+    "options": [
+      "The Weeknd",
+      "Post Malone",
+      "Ed Sheeran",
+      "Bruno Mars"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": "q020",
+    "category": "Pop Quiz",
+    "question": "Which fictional detective lives at 221B Baker Street?",
+    "options": [
+      "Hercule Poirot",
+      "Sherlock Holmes",
+      "Columbo",
+      "Miss Marple"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": "q021",
+    "category": "Malayalam Movie Quiz",
+    "question": "Who directed the Malayalam film Drishyam?",
+    "options": [
+      "Jeethu Joseph",
+      "Lijo Jose Pellissery",
+      "Aashiq Abu",
+      "Ranjith"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": "q022",
+    "category": "Malayalam Movie Quiz",
+    "question": "Which actor played Georgekutty in Drishyam?",
+    "options": [
+      "Mammootty",
+      "Prithviraj Sukumaran",
+      "Mohanlal",
+      "Fahadh Faasil"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": "q023",
+    "category": "Malayalam Movie Quiz",
+    "question": "Which Malayalam film won the National Film Award for Best Feature Film at the 66th National Film Awards?",
+    "options": [
+      "Kumbalangi Nights",
+      "Sudani from Nigeria",
+      "Marakkar: Lion of the Arabian Sea",
+      "Jallikattu"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": "q024",
+    "category": "Malayalam Movie Quiz",
+    "question": "Who directed the film Kumbalangi Nights?",
+    "options": [
+      "Dileesh Pothan",
+      "Madhu C. Narayanan",
+      "Anwar Rasheed",
+      "Aashiq Abu"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": "q025",
+    "category": "Malayalam Movie Quiz",
+    "question": "Which actor played Joji in the 2021 film Joji?",
+    "options": [
+      "Dulquer Salmaan",
+      "Fahadh Faasil",
+      "Tovino Thomas",
+      "Asif Ali"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": "q026",
+    "category": "Malayalam Movie Quiz",
+    "question": "The film Bangalore Days was directed by whom?",
+    "options": [
+      "Anjali Menon",
+      "Sameer Thahir",
+      "Vineeth Sreenivasan",
+      "Anoop Menon"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": "q027",
+    "category": "Malayalam Movie Quiz",
+    "question": "Which Malayalam film features the characters Koshy Kurian and Ayyappan Nair?",
+    "options": [
+      "Ayyappanum Koshiyum",
+      "Lucifer",
+      "Angamaly Diaries",
+      "Kaduva"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": "q028",
+    "category": "Malayalam Movie Quiz",
+    "question": "Who played the title character in the film Pathemari?",
+    "options": [
+      "Mohanlal",
+      "Mammootty",
+      "Suresh Gopi",
+      "Jayaram"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": "q029",
+    "category": "Malayalam Movie Quiz",
+    "question": "Which director is known for films such as Ee.Ma.Yau. and Churuli?",
+    "options": [
+      "Lijo Jose Pellissery",
+      "Vineeth Sreenivasan",
+      "Jeethu Joseph",
+      "Blessy"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": "q030",
+    "category": "Malayalam Movie Quiz",
+    "question": "In Premam, what is the name of Nivin Pauly's character?",
+    "options": [
+      "George David",
+      "Arun Neelakandan",
+      "Ajith Kumar",
+      "Koshy Kurian"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": "q031",
+    "category": "Capital Cities",
+    "question": "What is the capital of Kazakhstan?",
+    "options": [
+      "Almaty",
+      "Astana",
+      "Tashkent",
+      "Bishkek"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": "q032",
+    "category": "Capital Cities",
+    "question": "What is the capital of Slovenia?",
+    "options": [
+      "Zagreb",
+      "Ljubljana",
+      "Bratislava",
+      "Sarajevo"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": "q033",
+    "category": "Capital Cities",
+    "question": "What is the capital of Madagascar?",
+    "options": [
+      "Antananarivo",
+      "Maputo",
+      "Nairobi",
+      "Lilongwe"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": "q034",
+    "category": "Capital Cities",
+    "question": "What is the capital of Mongolia?",
+    "options": [
+      "Ulaanbaatar",
+      "Astana",
+      "Dushanbe",
+      "Baku"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": "q035",
+    "category": "Capital Cities",
+    "question": "What is the capital of Bhutan?",
+    "options": [
+      "Paro",
+      "Thimphu",
+      "Kathmandu",
+      "Punakha"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": "q036",
+    "category": "Capital Cities",
+    "question": "What is the capital of Namibia?",
+    "options": [
+      "Gaborone",
+      "Windhoek",
+      "Maseru",
+      "Maputo"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": "q037",
+    "category": "Capital Cities",
+    "question": "What is the capital of Laos?",
+    "options": [
+      "Vientiane",
+      "Phnom Penh",
+      "Yangon",
+      "Hanoi"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": "q038",
+    "category": "Capital Cities",
+    "question": "What is the capital of Kyrgyzstan?",
+    "options": [
+      "Bishkek",
+      "Dushanbe",
+      "Tashkent",
+      "Ashgabat"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": "q039",
+    "category": "Capital Cities",
+    "question": "What is the capital of Suriname?",
+    "options": [
+      "Cayenne",
+      "Georgetown",
+      "Paramaribo",
+      "Belmopan"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": "q040",
+    "category": "Capital Cities",
+    "question": "What is the capital of Montenegro?",
+    "options": [
+      "Podgorica",
+      "Skopje",
+      "Pristina",
+      "Tirana"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": "q041",
+    "category": "Christ University Bangalore",
+    "question": "In what year did CHRIST begin as Christ College?",
+    "options": [
+      "1965",
+      "1969",
+      "1972",
+      "1975"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": "q042",
+    "category": "Christ University Bangalore",
+    "question": "Which educationalist and social reformer is the vision behind CHRIST (Deemed to be University)?",
+    "options": [
+      "St Kuriakose Elias Chavara",
+      "St Alphonsa",
+      "Mother Teresa",
+      "St Thomas the Apostle"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": "q043",
+    "category": "Christ University Bangalore",
+    "question": "In which year did the institution receive autonomy from the UGC?",
+    "options": [
+      "1998",
+      "2001",
+      "2004",
+      "2008"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": "q044",
+    "category": "Christ University Bangalore",
+    "question": "In which year was Christ University declared a Deemed to be University?",
+    "options": [
+      "2004",
+      "2006",
+      "2008",
+      "2010"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": "q045",
+    "category": "Christ University Bangalore",
+    "question": "Which was the first Bangalore campus to be established?",
+    "options": [
+      "Kengeri Campus",
+      "Bannerghatta Road Campus",
+      "Yeshwanthpur Campus",
+      "Central Campus"
+    ],
+    "correctAnswer": 3
+  },
+  {
+    "id": "q046",
+    "category": "Christ University Bangalore",
+    "question": "Which Bangalore campus is home to the School of Engineering & Technology?",
+    "options": [
+      "Central Campus",
+      "Kengeri Campus",
+      "Bannerghatta Road Campus",
+      "Yeshwanthpur Campus"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": "q047",
+    "category": "Christ University Bangalore",
+    "question": "In which year was the Bangalore Bannerghatta Road Campus established?",
+    "options": [
+      "2012",
+      "2014",
+      "2016",
+      "2018"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": "q048",
+    "category": "Christ University Bangalore",
+    "question": "In which year was the Bangalore Yeshwanthpur Campus inaugurated?",
+    "options": [
+      "2019",
+      "2020",
+      "2022",
+      "2024"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": "q049",
+    "category": "Christ University Bangalore",
+    "question": "What is the stated vision of CHRIST (Deemed to be University)?",
+    "options": [
+      "Knowledge and Innovation",
+      "Excellence and Service",
+      "Education for All",
+      "Learn, Lead, Serve"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": "q050",
+    "category": "Christ University Bangalore",
+    "question": "Which grade did CHRIST receive in its 2022 NAAC reaccreditation?",
+    "options": [
+      "A",
+      "A+",
+      "A++",
+      "B++"
+    ],
+    "correctAnswer": 1
+  }
+]

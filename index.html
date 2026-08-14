@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RoNiks Quiz — Game Show Edition</title>
+  <meta name="description" content="A premium local-first team quiz game show." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <div class="ambient ambient-a"></div>
+    <div class="ambient ambient-b"></div>
+    <div class="ambient ambient-c"></div>
+    <div id="particleField" class="particle-field" aria-hidden="true"></div>
+    <canvas id="globalConfettiCanvas" aria-hidden="true"></canvas>
+
+    <header class="topbar">
+      <button class="brand" id="homeBtn" aria-label="Go to home">
+        <span class="brand-mark">Q</span>
+        <span class="brand-copy">
+          <strong>QUIZ NIGHT</strong>
+          <small>GAME SHOW EDITION</small>
+        </span>
+      </button>
+      <div class="top-actions">
+        <button class="icon-btn" id="soundBtn" title="Toggle sound" aria-label="Toggle sound">🔊</button>
+        <button class="icon-btn" id="fullscreenBtn" title="Toggle fullscreen" aria-label="Toggle fullscreen">⛶</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="screen active" id="homeScreen">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <div class="eyebrow">WELCOME TO THE</div>
+            <h1 class="roniks-title"><span>RoNiks</span><br><em>Quiz</em></h1>
+            <p class="hero-welcome">Welcome to the <strong>RoNiks Night</strong> — a premium game-show experience for your crew.</p>
+            <div class="hero-cta">
+              <button class="primary-btn xl" id="startQuizBtn">START QUIZ <span>→</span></button>
+              <button class="secondary-btn xl" id="questionBankBtn">QUESTION BANK</button>
+            </div>
+            <button class="ghost-btn" id="settingsBtn" style="margin-top:10px">SETTINGS</button>
+            <div class="feature-row">
+              <span>✦ 2–6 TEAMS</span>
+              <span>✦ LOCAL & PRIVATE</span>
+              <span>✦ NO BACKEND</span>
+            </div>
+          </div>
+          <div class="hero-stage">
+            <div class="stage-card">
+              <div class="stage-lights"></div>
+              <div class="stage-head">TONIGHT'S SHOW</div>
+              <div class="stage-score">01</div>
+              <div class="stage-question">Which planet is known as the Red Planet?</div>
+              <div class="stage-options">
+                <div>Jupiter</div><div class="correct">Mars <span>✓</span></div>
+                <div>Venus</div><div>Saturn</div>
+              </div>
+              <div class="stage-footer"><span>QUESTION 1 / 10</span><span>THE BRAINIACS</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen" id="categoryScreen">
+        <div class="category-select-wrap">
+          <div class="eyebrow">CHOOSE THE NEXT ROUND</div>
+          <h2>Select a category</h2>
+          <p class="category-select-intro">Choose a category to play. Every remaining question in that category will be played.</p>
+          <div id="categoryGrid" class="category-grid"></div>
+          <div class="category-progress" id="categoryProgress"></div>
+          <button class="ghost-btn" data-home>← HOME</button>
+        </div>
+      </section>
+
+      <section class="screen" id="setupScreen">
+        <div class="screen-header">
+          <div>
+            <div class="eyebrow">SET THE STAGE</div>
+            <h2>Build your teams</h2>
+            <p>Pick a roster, name the teams, and decide how long the show runs.</p>
+          </div>
+          <button class="ghost-btn" data-home>← HOME</button>
+        </div>
+
+        <div class="setup-grid">
+          <div class="glass-card setup-card">
+            <div class="field-label">NUMBER OF TEAMS</div>
+            <div class="stepper">
+              <button id="teamMinus">−</button>
+              <span id="teamCount">2</span>
+              <button id="teamPlus">+</button>
+            </div>
+            <div id="teamInputs" class="team-inputs"></div>
+          </div>
+          <div class="glass-card setup-card">
+            <div class="field-label">QUESTIONS TO PLAY</div>
+            <div class="question-counts" id="questionCounts"></div>
+            <div class="setup-note">Questions are shuffled each time. Wrong answers are eliminated, never penalised. After a miss, the host can open the question to the other teams.</div>
+            <button class="primary-btn wide" id="beginShowBtn">BEGIN THE SHOW →</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen" id="quizScreen">
+        <div class="quiz-head">
+          <div class="show-tag">
+            <span class="live-dot"></span>
+            LIVE QUIZ
+          </div>
+          <div class="question-meta">
+            <span id="questionCounter">QUESTION 1 / 10</span>
+            <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+          </div>
+          <button class="ghost-btn" id="quizExitBtn">EXIT</button>
+        </div>
+
+        <div class="turn-banner">
+          <div class="turn-label">NOW PLAYING</div>
+          <div class="turn-team" id="turnTeam">THE BRAINIACS</div>
+          <div class="turn-score" id="turnScore">0 POINTS</div>
+        </div>
+
+        <div class="quiz-layout">
+          <aside class="scoreboard glass-card">
+            <div class="scoreboard-title">SCOREBOARD</div>
+            <div id="scoreboardList"></div>
+          </aside>
+
+          <div class="question-panel">
+            <div class="question-card glass-card" id="questionCard">
+              <div class="question-kicker" id="questionCategory">GENERAL KNOWLEDGE</div>
+              <h2 id="questionText">Question</h2>
+              <div class="answers-grid" id="answersGrid"></div>
+              <div class="feedback" id="feedback" aria-live="polite"></div>
+              <div class="steal-panel" id="stealPanel" hidden>
+                <div class="steal-kicker">STEAL OPPORTUNITY</div>
+                <h3>Who got it right?</h3>
+                <p>All other teams can answer out loud. As host, select the team that got the answer correct.</p>
+                <div class="steal-team-grid" id="stealTeamGrid"></div>
+                <button class="ghost-btn" id="closeStealBtn">CANCEL STEAL</button>
+              </div>
+              <button class="steal-open-btn" id="stealOpenBtn" hidden>OPEN TO OTHER TEAMS</button>
+              <button class="next-btn" id="nextQuestionBtn">NEXT QUESTION <span>→</span></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="answer-overlay" id="answerOverlay" hidden aria-live="assertive">
+        <div class="answer-overlay-glow"></div>
+        <div class="answer-overlay-icon" id="answerOverlayIcon">✓</div>
+        <div class="answer-overlay-label" id="answerOverlayLabel">CORRECT!</div>
+        <div class="answer-overlay-message" id="answerOverlayMessage">Great answer.</div>
+        <div class="answer-overlay-actions" id="answerOverlayActions">
+          <button class="secondary-btn xl" id="answerOverlaySecondary">KEEP TRYING</button>
+          <button class="primary-btn xl" id="answerOverlayAction">NEXT QUESTION →</button>
+        </div>
+      </div>
+
+      <section class="screen" id="resultsScreen">
+        <div class="results-wrap">
+          <div class="eyebrow">FINAL RESULTS</div>
+          <h2>Quiz complete.</h2>
+          <p id="resultsSubtitle">Here’s how the teams finished.</p>
+          <div class="results-layout">
+            <div class="glass-card podium-card">
+              <div class="podium-header">FINAL SCOREBOARD</div>
+              <div id="resultsList"></div>
+            </div>
+            <div class="glass-card declare-card">
+              <div class="podium-header">HOST CONTROLS</div>
+              <p>Choose the winner when the scores are tied — or just make the call yourself.</p>
+              <div id="winnerChoices" class="winner-choices"></div>
+              <button class="secondary-btn wide" data-home>BACK TO HOME</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen" id="winnerScreen">
+        <div class="winner-screen">
+          <canvas id="confettiCanvas"></canvas>
+          <div class="winner-burst"></div>
+          <div class="winner-trophy">🏆</div>
+          <div class="eyebrow winner-finale-eyebrow">AND TONIGHT'S</div>
+          <h2>WINNER!</h2>
+          <div class="winner-name" id="winnerName">QUIZ MASTERS</div>
+          <div class="winner-score" id="winnerScore">7 POINTS</div>
+          <div class="winner-actions">
+            <button class="primary-btn xl" id="playAgainBtn">PLAY AGAIN ↻</button>
+            <button class="secondary-btn xl" data-home>HOME</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen" id="questionBankScreen">
+        <div class="screen-header">
+          <div>
+            <div class="eyebrow">HOST AREA</div>
+            <h2>Question bank</h2>
+            <p>Add, manage, import and export the questions used by your show.</p>
+          </div>
+          <div class="header-actions">
+            <button class="secondary-btn" id="importBtn">IMPORT JSON</button>
+            <button class="secondary-btn" id="exportBtn">EXPORT JSON</button>
+            <button class="ghost-btn" data-home>← HOME</button>
+          </div>
+        </div>
+
+        <div class="bank-toolbar">
+          <button class="primary-btn" id="addQuestionBtn">+ ADD QUESTION</button>
+          <button class="danger-btn" id="resetBankBtn">RESET DEFAULTS</button>
+          <span id="bankCount" class="bank-count">10 questions</span>
+        </div>
+
+        <div class="glass-card bank-card">
+          <div id="questionBankList" class="bank-list"></div>
+        </div>
+
+        <input type="file" id="importFile" accept=".json,application/json" hidden />
+      </section>
+    </main>
+
+    <div class="modal-backdrop" id="modalBackdrop" hidden>
+      <div class="modal glass-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-head">
+          <div>
+            <div class="eyebrow" id="modalEyebrow">QUESTION EDITOR</div>
+            <h3 id="modalTitle">Add a question</h3>
+          </div>
+          <button class="icon-btn" id="closeModalBtn" aria-label="Close">✕</button>
+        </div>
+        <form id="questionForm">
+          <label class="form-field">
+            <span>Category</span>
+            <input id="qCategoryInput" required maxlength="40" placeholder="e.g. Geography" />
+          </label>
+          <label class="form-field">
+            <span>Question</span>
+            <textarea id="qTextInput" rows="3" required placeholder="e.g. What is the capital of France?"></textarea>
+          </label>
+          <div class="option-fields">
+            <label class="form-field"><span>Option A</span><input id="qAInput" required /></label>
+            <label class="form-field"><span>Option B</span><input id="qBInput" required /></label>
+            <label class="form-field"><span>Option C</span><input id="qCInput" required /></label>
+            <label class="form-field"><span>Option D</span><input id="qDInput" required /></label>
+          </div>
+          <label class="form-field">
+            <span>Correct answer</span>
+            <select id="correctInput" required>
+              <option value="0">Option A</option>
+              <option value="1">Option B</option>
+              <option value="2">Option C</option>
+              <option value="3">Option D</option>
+            </select>
+          </label>
+          <div class="modal-actions">
+            <button type="button" class="secondary-btn" id="cancelModalBtn">CANCEL</button>
+            <button type="submit" class="primary-btn">SAVE QUESTION</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="toast" id="toast" aria-live="polite"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
