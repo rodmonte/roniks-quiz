@@ -1544,3 +1544,84 @@ main{
     height:auto !important;
   }
 }
+
+/* =========================================================
+   iPad Safari page-scroll fix
+   Only iPad/tablet layout is changed.
+   ========================================================= */
+@media (min-width:768px) and (max-width:1100px){
+  html,
+  body{
+    height:auto !important;
+    min-height:100% !important;
+    overflow-x:hidden !important;
+    overflow-y:auto !important;
+    -webkit-overflow-scrolling:touch !important;
+  }
+
+  .app-shell{
+    height:auto !important;
+    min-height:100dvh !important;
+    overflow:visible !important;
+  }
+
+  main{
+    position:relative !important;
+    top:auto !important;
+    left:auto !important;
+    right:auto !important;
+    bottom:auto !important;
+    width:100% !important;
+    height:auto !important;
+    min-height:calc(100dvh - 68px) !important;
+    overflow:visible !important;
+  }
+
+  #quizScreen{
+    position:relative !important;
+    inset:auto !important;
+    display:block !important;
+    width:100% !important;
+    height:auto !important;
+    min-height:calc(100dvh - 68px) !important;
+    max-height:none !important;
+    overflow:visible !important;
+    padding-bottom:60px !important;
+  }
+
+  #quizScreen .quiz-head,
+  #quizScreen .turn-banner,
+  #quizScreen .quiz-layout{
+    height:auto !important;
+  }
+
+  #quizScreen .quiz-layout{
+    display:grid !important;
+    overflow:visible !important;
+  }
+
+  #quizScreen .question-panel,
+  #quizScreen .question-card,
+  #quizScreen .steal-panel,
+  #quizScreen .steal-team-grid{
+    height:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
+    overflow:visible !important;
+  }
+
+  #quizScreen .question-card{
+    padding-bottom:28px !important;
+  }
+}
+
+/* Portrait iPad: same normal page scrolling model. */
+@media (min-width:768px) and (max-width:899px){
+  #quizScreen{
+    min-height:calc(100dvh - 68px) !important;
+  }
+
+  #quizScreen .quiz-layout{
+    grid-template-columns:1fr !important;
+  }
+}

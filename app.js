@@ -403,10 +403,9 @@ function openSteal(){
 
   if(window.matchMedia("(min-width:768px) and (max-width:1100px)").matches){
     requestAnimationFrame(()=>{
-      const screen=$("quizScreen");
-      screen.scrollTo({
-        top:screen.scrollHeight,
-        behavior:"smooth"
+      $("stealPanel").scrollIntoView({
+        behavior:"smooth",
+        block:"start"
       });
     });
   }
