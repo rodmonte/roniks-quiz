@@ -400,6 +400,13 @@ function openSteal(){
   grid.after(note);
 
   playTone("steal");
+
+  if(window.matchMedia("(min-width:768px) and (max-width:1100px)").matches){
+    $("questionCard").scrollTo({
+      top: $("questionCard").scrollHeight,
+      behavior: "smooth"
+    });
+  }
 }
 
 function awardSteal(teamIndex){
