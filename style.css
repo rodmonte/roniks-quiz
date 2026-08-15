@@ -1625,3 +1625,75 @@ main{
     grid-template-columns:1fr !important;
   }
 }
+
+/* =========================================================
+   iPad Steal Opportunity modal
+   Feature-neutral: only changes how the steal panel is
+   presented on tablet widths so every team is reachable.
+   ========================================================= */
+@media (min-width:768px) and (max-width:1100px){
+  #quizScreen .steal-panel{
+    position:fixed !important;
+    z-index:250 !important;
+    left:4vw !important;
+    right:4vw !important;
+    top:calc(68px + 4vh) !important;
+    bottom:4vh !important;
+
+    width:auto !important;
+    max-width:none !important;
+    height:auto !important;
+    max-height:none !important;
+    min-height:0 !important;
+
+    margin:0 !important;
+    padding:22px !important;
+    overflow-y:auto !important;
+    overflow-x:hidden !important;
+
+    -webkit-overflow-scrolling:touch !important;
+    overscroll-behavior:contain !important;
+    touch-action:pan-y !important;
+
+    background:
+      linear-gradient(145deg,rgba(22,24,34,.98),rgba(12,14,22,.98)) !important;
+    box-shadow:
+      0 30px 100px rgba(0,0,0,.55),
+      0 0 0 9999px rgba(4,5,10,.62) !important;
+    border:1px solid rgba(255,216,106,.24) !important;
+  }
+
+  #quizScreen .steal-panel .steal-team-grid{
+    display:grid !important;
+    grid-template-columns:1fr 1fr !important;
+    gap:10px !important;
+    max-height:none !important;
+    overflow:visible !important;
+  }
+
+  #quizScreen .steal-panel .steal-team-btn{
+    min-height:72px !important;
+  }
+
+  #quizScreen .steal-panel .ghost-btn{
+    position:sticky !important;
+    bottom:0 !important;
+    margin-top:14px !important;
+    background:rgba(12,14,22,.96) !important;
+    z-index:2 !important;
+  }
+}
+
+@media (min-width:768px) and (max-width:899px){
+  #quizScreen .steal-panel{
+    left:3vw !important;
+    right:3vw !important;
+    top:calc(68px + 2vh) !important;
+    bottom:2vh !important;
+    padding:18px !important;
+  }
+
+  #quizScreen .steal-panel .steal-team-grid{
+    grid-template-columns:1fr !important;
+  }
+}

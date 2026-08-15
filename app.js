@@ -400,15 +400,6 @@ function openSteal(){
   grid.after(note);
 
   playTone("steal");
-
-  if(window.matchMedia("(min-width:768px) and (max-width:1100px)").matches){
-    requestAnimationFrame(()=>{
-      $("stealPanel").scrollIntoView({
-        behavior:"smooth",
-        block:"start"
-      });
-    });
-  }
 }
 
 function awardSteal(teamIndex){
