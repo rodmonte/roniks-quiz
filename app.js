@@ -333,7 +333,7 @@ function showAnswerOverlay(type,message,primaryLabel,primaryAction,secondaryLabe
   overlay.classList.add(type);
 
   $("answerOverlayIcon").textContent=type==="correct"?"✓":"×";
-  $("answerOverlayLabel").textContent=type==="correct"?"CORRECT!":"TRY AGAIN";
+  $("answerOverlayLabel").textContent=type==="correct"?"CORRECT!":"You fucked Up !";
   $("answerOverlayMessage").textContent=message;
 
   const primary=$("answerOverlayAction");

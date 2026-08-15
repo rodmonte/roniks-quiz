@@ -857,3 +857,432 @@ main{
 .category-card .category-arrow{
   position:absolute !important;
 }
+
+/* =========================================================
+   iPad / tablet responsive overrides
+   Keeps the existing desktop experience unchanged.
+   ========================================================= */
+@media (min-width:768px) and (max-width:1100px){
+  .topbar{
+    height:72px !important;
+    padding:0 28px !important;
+  }
+  main{
+    top:72px !important;
+    height:calc(100dvh - 72px) !important;
+  }
+  .screen{
+    padding:18px 24px 28px !important;
+  }
+
+  #quizScreen{
+    row-gap:8px !important;
+    padding-left:12px !important;
+    padding-right:12px !important;
+  }
+
+  #quizScreen .quiz-head{
+    grid-template-columns:150px minmax(0,1fr) 88px !important;
+    gap:12px !important;
+    align-items:center !important;
+  }
+
+  #quizScreen .question-meta{
+    min-width:0 !important;
+  }
+
+  #quizScreen .turn-banner{
+    min-height:58px !important;
+    padding:12px 16px !important;
+  }
+
+  #quizScreen .turn-team{
+    font-size:28px !important;
+  }
+
+  #quizScreen .quiz-layout{
+    grid-template-columns:1fr !important;
+    grid-template-rows:auto minmax(0,1fr) !important;
+    gap:12px !important;
+    width:100% !important;
+    max-width:none !important;
+  }
+
+  #quizScreen .scoreboard{
+    width:100% !important;
+    min-height:0 !important;
+    padding:14px 16px !important;
+  }
+
+  #quizScreen .scoreboard-title{
+    margin-bottom:8px !important;
+  }
+
+  #quizScreen .scoreboard-list-wrap{
+    display:grid !important;
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:8px !important;
+  }
+
+  #quizScreen .score-row{
+    min-height:44px !important;
+  }
+
+  #quizScreen .question-panel{
+    width:100% !important;
+    min-width:0 !important;
+  }
+
+  #quizScreen .question-card{
+    width:100% !important;
+    min-width:0 !important;
+    padding:20px 20px 24px !important;
+    overflow:auto !important;
+  }
+
+  #quizScreen .question-card h2{
+    font-size:clamp(32px,4.3vw,46px) !important;
+    line-height:1.04 !important;
+    margin-bottom:16px !important;
+  }
+
+  #quizScreen .answers-grid{
+    grid-template-columns:1fr 1fr !important;
+    gap:10px !important;
+  }
+
+  #quizScreen .answer-btn{
+    min-width:0 !important;
+    min-height:68px !important;
+    padding:12px 14px !important;
+  }
+
+  #quizScreen .answer-text{
+    min-width:0 !important;
+    overflow-wrap:anywhere !important;
+  }
+
+  #quizScreen .steal-panel{
+    max-width:none !important;
+    padding:16px !important;
+  }
+
+  #quizScreen .steal-team-grid{
+    grid-template-columns:1fr 1fr !important;
+    gap:10px !important;
+  }
+
+  #quizScreen .steal-team-btn{
+    min-width:0 !important;
+  }
+
+  .category-select-wrap,
+  .setup-grid,
+  .screen-header,
+  .results-wrap,
+  .bank-toolbar,
+  .question-bank-list{
+    width:100% !important;
+    max-width:100% !important;
+  }
+
+  .category-grid{
+    grid-template-columns:1fr 1fr !important;
+    gap:14px !important;
+  }
+
+  .category-card{
+    min-width:0 !important;
+  }
+}
+
+@media (min-width:768px) and (max-width:900px){
+  #quizScreen .quiz-head{
+    grid-template-columns:1fr !important;
+    row-gap:8px !important;
+  }
+
+  #quizScreen .quiz-head .show-tag{
+    justify-self:start !important;
+  }
+
+  #quizScreen .quiz-head .question-meta{
+    order:3 !important;
+    width:100% !important;
+  }
+
+  #quizScreen .quiz-head > .ghost-btn{
+    position:absolute !important;
+    top:18px !important;
+    right:24px !important;
+  }
+
+  #quizScreen .turn-banner{
+    margin-top:0 !important;
+  }
+
+  #quizScreen .question-card h2{
+    font-size:34px !important;
+  }
+
+  #quizScreen .answers-grid{
+    grid-template-columns:1fr !important;
+  }
+
+  #quizScreen .answer-btn{
+    min-height:62px !important;
+  }
+}
+
+.category-name,
+.category-meta,
+.bank-q,
+.bank-meta,
+.results-team{
+  overflow-wrap:anywhere !important;
+}
+
+@media (pointer:coarse) and (min-width:768px) and (max-width:1100px){
+  button,
+  .answer-btn,
+  .category-card,
+  .steal-team-btn{
+    -webkit-tap-highlight-color:transparent;
+    touch-action:manipulation;
+  }
+}
+
+/* =========================================================
+   iPad responsive fit — feature-neutral layout only
+   ========================================================= */
+
+/* iPad landscape / medium tablets: preserve the two-column game-show
+   composition but compact it so the question + steal area stays in view. */
+@media (min-width:900px) and (max-width:1180px){
+  .topbar{
+    height:68px !important;
+    padding:0 24px !important;
+  }
+  main{
+    top:68px !important;
+    height:calc(100dvh - 68px) !important;
+  }
+  .screen{
+    padding:14px 18px 20px !important;
+  }
+
+  #quizScreen{
+    padding-left:8px !important;
+    padding-right:8px !important;
+    row-gap:7px !important;
+  }
+
+  #quizScreen .quiz-head,
+  #quizScreen .turn-banner,
+  #quizScreen .quiz-layout{
+    width:100% !important;
+    max-width:1120px !important;
+  }
+
+  #quizScreen .quiz-head{
+    gap:10px !important;
+  }
+
+  #quizScreen .turn-banner{
+    min-height:54px !important;
+    padding:10px 16px !important;
+  }
+
+  #quizScreen .turn-team{
+    font-size:26px !important;
+  }
+
+  #quizScreen .quiz-layout{
+    grid-template-columns:190px minmax(0,1fr) !important;
+    column-gap:14px !important;
+    align-items:start !important;
+  }
+
+  #quizScreen .scoreboard{
+    padding:12px 14px !important;
+  }
+
+  #quizScreen .question-card{
+    padding:16px 18px 20px !important;
+    max-height:calc(100dvh - 190px) !important;
+    overflow-y:auto !important;
+    overflow-x:hidden !important;
+  }
+
+  #quizScreen .question-card h2{
+    font-size:clamp(30px,3.4vw,42px) !important;
+    line-height:1.03 !important;
+    margin:8px 0 14px !important;
+  }
+
+  #quizScreen .answers-grid{
+    gap:8px !important;
+  }
+
+  #quizScreen .answer-btn{
+    min-height:58px !important;
+    padding:10px 12px !important;
+  }
+
+  #quizScreen .feedback{
+    min-height:30px !important;
+  }
+
+  #quizScreen .steal-panel{
+    margin-top:8px !important;
+    padding:14px !important;
+  }
+
+  #quizScreen .steal-panel h3{
+    margin:4px 0 !important;
+    font-size:22px !important;
+  }
+
+  #quizScreen .steal-panel p{
+    margin-bottom:10px !important;
+    font-size:13px !important;
+  }
+
+  #quizScreen .steal-team-grid{
+    gap:8px !important;
+    margin-top:8px !important;
+  }
+
+  #quizScreen .steal-team-btn{
+    min-height:58px !important;
+    padding:10px 34px 10px 12px !important;
+  }
+
+  #quizScreen .steal-team-name{
+    font-size:16px !important;
+  }
+
+  #quizScreen .steal-points{
+    margin-top:4px !important;
+    font-size:10px !important;
+  }
+}
+
+/* iPad portrait: stack the scoreboard above the question and keep every
+   interactive region within the viewport; internal card scrolling is only
+   used when the question itself is unusually long. */
+@media (min-width:768px) and (max-width:899px){
+  .topbar{
+    height:68px !important;
+    padding:0 20px !important;
+  }
+  main{
+    top:68px !important;
+    height:calc(100dvh - 68px) !important;
+  }
+
+  #quizScreen{
+    padding:12px 14px 16px !important;
+    row-gap:7px !important;
+  }
+
+  #quizScreen .quiz-head{
+    grid-template-columns:1fr !important;
+    row-gap:5px !important;
+  }
+
+  #quizScreen .quiz-head .question-meta{
+    width:100% !important;
+    order:2 !important;
+  }
+
+  #quizScreen .quiz-head > .ghost-btn{
+    position:absolute !important;
+    top:12px !important;
+    right:14px !important;
+  }
+
+  #quizScreen .turn-banner{
+    min-height:52px !important;
+    padding:9px 14px !important;
+  }
+
+  #quizScreen .turn-team{
+    font-size:24px !important;
+  }
+
+  #quizScreen .quiz-layout{
+    grid-template-columns:1fr !important;
+    grid-template-rows:auto minmax(0,1fr) !important;
+    gap:8px !important;
+  }
+
+  #quizScreen .scoreboard{
+    padding:10px 12px !important;
+  }
+
+  #quizScreen .scoreboard-list-wrap{
+    display:grid !important;
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:6px !important;
+  }
+
+  #quizScreen .score-row{
+    min-height:38px !important;
+  }
+
+  #quizScreen .question-card{
+    padding:14px 16px 18px !important;
+    max-height:calc(100dvh - 250px) !important;
+    overflow-y:auto !important;
+    overflow-x:hidden !important;
+  }
+
+  #quizScreen .question-card h2{
+    font-size:30px !important;
+    line-height:1.04 !important;
+    margin:7px 0 12px !important;
+  }
+
+  #quizScreen .answers-grid{
+    grid-template-columns:1fr 1fr !important;
+    gap:8px !important;
+  }
+
+  #quizScreen .answer-btn{
+    min-height:54px !important;
+    padding:9px 10px !important;
+  }
+
+  #quizScreen .answer-text{
+    overflow-wrap:anywhere !important;
+  }
+
+  #quizScreen .steal-panel{
+    margin-top:8px !important;
+    padding:12px !important;
+  }
+
+  #quizScreen .steal-panel p{
+    font-size:12px !important;
+    margin-bottom:8px !important;
+  }
+
+  #quizScreen .steal-team-grid{
+    grid-template-columns:1fr 1fr !important;
+    gap:7px !important;
+  }
+
+  #quizScreen .steal-team-btn{
+    min-height:54px !important;
+    padding:9px 32px 9px 11px !important;
+  }
+
+  #quizScreen .steal-team-name{
+    font-size:15px !important;
+  }
+
+  #quizScreen .steal-points{
+    font-size:9px !important;
+  }
+}
