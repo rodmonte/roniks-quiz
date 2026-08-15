@@ -378,13 +378,19 @@ function showAnswerOverlay(type,message,primaryLabel,primaryAction,secondaryLabe
 }
 function closeStealModal(){
   const modal=$("stealModal");
-  if(modal) modal.hidden=true;
+  if(!modal) return;
+  modal.hidden=true;
+  modal.style.display="";
 }
-
 function openStealModal(){
   const modal=$("stealModal");
   const grid=$("stealModalGrid");
   if(!modal || !grid) return;
+
+  // Detach the modal from the fixed/overflow-constrained quiz layout.
+  if(modal.parentElement !== document.body){
+    document.body.appendChild(modal);
+  }
 
   const eligible=state.teams.filter((team,index)=>
     index!==state.currentTeam && !state.failedTeams.has(index)
@@ -404,42 +410,44 @@ function openStealModal(){
     empty.className="steal-no-teams";
     empty.textContent="No other teams are available for this question.";
     grid.appendChild(empty);
-    modal.hidden=false;
-    return;
+  }else{
+    state.teams.forEach((team,index)=>{
+      if(index===state.currentTeam || state.failedTeams.has(index)) return;
+
+      const button=document.createElement("button");
+      button.type="button";
+      button.className="steal-modal-team";
+
+      const name=document.createElement("span");
+      name.className="steal-modal-team-name";
+      name.textContent=team.name;
+
+      const meta=document.createElement("span");
+      meta.className="steal-modal-team-meta";
+      meta.textContent="Give this team the next attempt";
+
+      const arrow=document.createElement("span");
+      arrow.className="steal-modal-team-arrow";
+      arrow.textContent="→";
+
+      button.append(name,meta,arrow);
+      button.addEventListener("click",()=>passQuestionToTeam(index));
+      grid.appendChild(button);
+    });
   }
 
-  state.teams.forEach((team,index)=>{
-    if(index===state.currentTeam || state.failedTeams.has(index)) return;
-
-    const button=document.createElement("button");
-    button.type="button";
-    button.className="steal-modal-team";
-
-    const name=document.createElement("span");
-    name.className="steal-modal-team-name";
-    name.textContent=team.name;
-
-    const meta=document.createElement("span");
-    meta.className="steal-modal-team-meta";
-    meta.textContent="Give this team the next attempt";
-
-    const arrow=document.createElement("span");
-    arrow.className="steal-modal-team-arrow";
-    arrow.textContent="→";
-
-    button.append(name,meta,arrow);
-    button.addEventListener("click",()=>passQuestionToTeam(index));
-    grid.appendChild(button);
-  });
-
   modal.hidden=false;
+  modal.style.display="grid";
+  requestAnimationFrame(()=>{
+    const card=modal.querySelector(".steal-modal-card");
+    if(card) card.scrollTop=0;
+  });
 }
 function openSteal(){
   if(state.answered) return;
 
   hideAnswerOverlay();
   state.wrongPhase=true;
-
   $("stealOpenBtn").hidden=true;
   $("feedback").innerHTML=`<div class="feedback-badge wrong">✕ ${escapeHtml(state.teams[state.currentTeam].name.toUpperCase())} MISSED</div>`;
 
