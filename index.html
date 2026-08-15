@@ -138,14 +138,17 @@
               <div class="answers-grid" id="answersGrid"></div>
               <div class="feedback" id="feedback" aria-live="polite"></div>
               <div class="steal-panel" id="stealPanel" hidden>
-                <div class="steal-kicker">STEAL OPPORTUNITY</div>
-                <h3>Who got it right?</h3>
-                <p>All other teams can answer out loud. As host, select the team that got the answer correct.</p>
+                <div class="steal-kicker">PASS IT TO ANOTHER TEAM</div>
+                <h3>Give another team a chance</h3>
+                <p>As host, choose another team to give the next attempt to.</p>
                 <div class="steal-team-grid" id="stealTeamGrid"></div>
-                <button class="ghost-btn" id="closeStealBtn">CANCEL STEAL</button>
+                <button class="ghost-btn" id="closeStealBtn">CANCEL PASS</button>
               </div>
               <button class="steal-open-btn" id="stealOpenBtn" hidden>OPEN TO OTHER TEAMS</button>
-              <button class="next-btn" id="nextQuestionBtn">NEXT QUESTION <span>→</span></button>
+              <div class="question-actions">
+                <button class="skip-btn" id="skipQuestionBtn" type="button">SKIP QUESTION</button>
+                <button class="next-btn" id="nextQuestionBtn">NEXT QUESTION <span>→</span></button>
+              </div>
             </div>
           </div>
         </div>
@@ -159,6 +162,22 @@
         <div class="answer-overlay-actions" id="answerOverlayActions">
           <button class="secondary-btn xl" id="answerOverlaySecondary">KEEP TRYING</button>
           <button class="primary-btn xl" id="answerOverlayAction">NEXT QUESTION →</button>
+          <button class="skip-overlay-btn xl" id="answerOverlaySkip">SKIP QUESTION</button>
+        </div>
+      </div>
+
+      <div class="steal-modal" id="stealModal" hidden aria-modal="true" role="dialog" aria-labelledby="stealModalTitle">
+        <div class="steal-modal-backdrop"></div>
+        <div class="steal-modal-card">
+          <div class="steal-modal-header">
+            <div>
+              <div class="steal-kicker">PASS IT TO ANOTHER TEAM</div>
+              <h2 id="stealModalTitle">Give another team a chance</h2>
+              <p>As host, choose another team to give the next attempt to.</p>
+            </div>
+            <button class="steal-modal-close ghost-btn" id="closeStealModalBtn" type="button">CANCEL</button>
+          </div>
+          <div class="steal-modal-grid" id="stealModalGrid"></div>
         </div>
       </div>
 

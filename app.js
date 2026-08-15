@@ -28,7 +28,8 @@ const state = {
   soundOn: true,
   categoryPool: {},
   completedCategories: new Set(),
-  currentCategory: null
+  currentCategory: null,
+  failedTeams: new Set()
 };
 
 const $ = id => document.getElementById(id);
@@ -221,6 +222,7 @@ function startCategoryRound(category){
   state.quizQuestions=shuffle(pool);
   state.currentIndex=0;
   state.selectedWrong=new Set();
+  state.failedTeams=new Set();
   state.answered=false;
   state.wrongPhase=false;
 
@@ -270,6 +272,7 @@ function beginQuiz(){
   state.currentIndex=0;
   state.currentTeam=0;
   state.selectedWrong=new Set();
+  state.failedTeams=new Set();
   state.answered=false;
   state.wrongPhase=false;
 
@@ -285,34 +288,51 @@ function renderScoreboard(){
     wrap.appendChild(row);
   });
 }
-function renderQuestion(){
+function renderQuestion(preserveAttempts=false){
   hideToast();
   hideAnswerOverlay();
+  closeStealModal();
+  closeStealModal();
   $("stealPanel").hidden=true;
   $("stealOpenBtn").hidden=true;
   state.wrongPhase=false;
+
   const q=state.quizQuestions[state.currentIndex];
-  state.selectedWrong=new Set();
+
+  if(!preserveAttempts){
+    state.selectedWrong=new Set();
+    state.failedTeams=new Set();
+  }
+
   state.answered=false;
+
   $("questionCounter").textContent=`${(state.currentCategory||"GENERAL KNOWLEDGE").toUpperCase()} · QUESTION ${state.currentIndex+1} / ${state.quizQuestions.length}`;
   $("progressBar").style.width=`${((state.currentIndex)/Math.max(1,state.quizQuestions.length))*100}%`;
   $("turnTeam").textContent=state.teams[state.currentTeam].name.toUpperCase();
   $("turnScore").textContent=`${state.teams[state.currentTeam].score} POINTS`;
   $("questionCategory").textContent=(q.category||state.currentCategory||"General Knowledge").toUpperCase();
   $("questionText").textContent=q.question;
-  $("feedback").innerHTML="";
+  $("feedback").innerHTML=preserveAttempts
+    ? `<div class="feedback-badge wrong">QUESTION PASSED TO ${escapeHtml(state.teams[state.currentTeam].name.toUpperCase())}</div>`
+    : "";
   $("nextQuestionBtn").classList.remove("show");
+  $("skipQuestionBtn").hidden=false;
   $("questionCard").classList.remove("correct-state","wrong-state");
+
   const grid=$("answersGrid");
   grid.innerHTML="";
+
   q.options.forEach((opt,idx)=>{
     const b=document.createElement("button");
     b.className="answer-btn";
     b.dataset.index=idx;
     b.innerHTML=`<span class="answer-letter">${String.fromCharCode(65+idx)}</span><span class="answer-text">${escapeHtml(opt)}</span>`;
+    b.disabled=state.selectedWrong.has(idx);
+    if(b.disabled) b.classList.add("wrong");
     b.onclick=()=>selectAnswer(idx,b);
     grid.appendChild(b);
   });
+
   renderScoreboard();
 }
 function hideAnswerOverlay(){
@@ -321,10 +341,9 @@ function hideAnswerOverlay(){
   overlay.hidden=true;
   overlay.classList.remove("correct","wrong");
   $("answerOverlaySecondary").hidden=true;
+  $("answerOverlaySkip").hidden=true;
 }
-
-
-function showAnswerOverlay(type,message,primaryLabel,primaryAction,secondaryLabel=null,secondaryAction=null){
+function showAnswerOverlay(type,message,primaryLabel,primaryAction,secondaryLabel=null,secondaryAction=null,skipLabel=null,skipAction=null){
   const overlay=$("answerOverlay");
   if(!overlay) return;
 
@@ -338,6 +357,7 @@ function showAnswerOverlay(type,message,primaryLabel,primaryAction,secondaryLabe
 
   const primary=$("answerOverlayAction");
   const secondary=$("answerOverlaySecondary");
+  const skip=$("answerOverlaySkip");
 
   primary.textContent=primaryLabel;
   primary.onclick=primaryAction;
@@ -346,86 +366,109 @@ function showAnswerOverlay(type,message,primaryLabel,primaryAction,secondaryLabe
     secondary.hidden=false;
     secondary.textContent=secondaryLabel;
     secondary.onclick=secondaryAction;
-  }else{
-    secondary.hidden=true;
-  }
+  }else secondary.hidden=true;
+
+  if(skipLabel && skipAction){
+    skip.hidden=false;
+    skip.textContent=skipLabel;
+    skip.onclick=skipAction;
+  }else skip.hidden=true;
 
   overlay.hidden=false;
 }
+function closeStealModal(){
+  const modal=$("stealModal");
+  if(modal) modal.hidden=true;
+}
 
+function openStealModal(){
+  const modal=$("stealModal");
+  const grid=$("stealModalGrid");
+  if(!modal || !grid) return;
 
+  const eligible=state.teams.filter((team,index)=>
+    index!==state.currentTeam && !state.failedTeams.has(index)
+  );
+
+  const title=modal.querySelector(".steal-kicker");
+  const heading=modal.querySelector("#stealModalTitle");
+  const description=modal.querySelector(".steal-modal-header p");
+  if(title) title.textContent="PASS IT TO ANOTHER TEAM";
+  if(heading) heading.textContent="Give another team a chance";
+  if(description) description.textContent="Choose a team to give the next attempt to.";
+
+  grid.replaceChildren();
+
+  if(!eligible.length){
+    const empty=document.createElement("div");
+    empty.className="steal-no-teams";
+    empty.textContent="No other teams are available for this question.";
+    grid.appendChild(empty);
+    modal.hidden=false;
+    return;
+  }
+
+  state.teams.forEach((team,index)=>{
+    if(index===state.currentTeam || state.failedTeams.has(index)) return;
+
+    const button=document.createElement("button");
+    button.type="button";
+    button.className="steal-modal-team";
+
+    const name=document.createElement("span");
+    name.className="steal-modal-team-name";
+    name.textContent=team.name;
+
+    const meta=document.createElement("span");
+    meta.className="steal-modal-team-meta";
+    meta.textContent="Give this team the next attempt";
+
+    const arrow=document.createElement("span");
+    arrow.className="steal-modal-team-arrow";
+    arrow.textContent="→";
+
+    button.append(name,meta,arrow);
+    button.addEventListener("click",()=>passQuestionToTeam(index));
+    grid.appendChild(button);
+  });
+
+  modal.hidden=false;
+}
 function openSteal(){
   if(state.answered) return;
 
   hideAnswerOverlay();
   state.wrongPhase=true;
 
-  $("stealPanel").hidden=false;
   $("stealOpenBtn").hidden=true;
   $("feedback").innerHTML=`<div class="feedback-badge wrong">✕ ${escapeHtml(state.teams[state.currentTeam].name.toUpperCase())} MISSED</div>`;
 
-  const grid=$("stealTeamGrid");
-  grid.innerHTML="";
-
-  state.teams.forEach((team,index)=>{
-    if(index===state.currentTeam) return;
-
-    const button=document.createElement("button");
-    button.type="button";
-    button.className="steal-team-btn";
-
-    const name=document.createElement("span");
-    name.className="steal-team-name";
-    name.textContent=team.name;
-
-    const meta=document.createElement("span");
-    meta.className="steal-points";
-    meta.textContent=`${team.score} ${team.score===1?"point":"points"} · award steal`;
-
-    const arrow=document.createElement("span");
-    arrow.className="steal-arrow";
-    arrow.textContent="→";
-
-    button.append(name,meta,arrow);
-    button.addEventListener("click",()=>awardSteal(index));
-    grid.appendChild(button);
-  });
-
-  const previous=grid.parentElement.querySelector(".steal-host-note");
-  if(previous) previous.remove();
-
-  const note=document.createElement("div");
-  note.className="steal-host-note";
-  note.textContent="Host: select the team that got the answer right. That team receives the point.";
-  grid.after(note);
-
+  openStealModal();
   playTone("steal");
 }
+function passQuestionToTeam(teamIndex){
+  if(state.answered) return;
+  if(teamIndex===state.currentTeam || state.failedTeams.has(teamIndex)) return;
 
-function awardSteal(teamIndex){
-  if(state.answered || teamIndex===state.currentTeam) return;
+  const previousTeam=state.currentTeam;
+  const nextTeam=state.teams[teamIndex];
 
-  const team=state.teams[teamIndex];
-  state.answered=true;
+  // The current team has already failed this question and is no longer eligible.
+  state.failedTeams.add(previousTeam);
+
+  state.currentTeam=teamIndex;
+  state.answered=false;
   state.wrongPhase=false;
 
-  [...document.querySelectorAll(".answer-btn")].forEach(button=>button.disabled=true);
-  team.score+=1;
-
+  closeStealModal();
   $("stealPanel").hidden=true;
-  $("feedback").innerHTML=`<div class="feedback-badge correct"><span class="checkmark">✓</span> ${escapeHtml(team.name.toUpperCase())} STOLE IT!</div>`;
-  $("nextQuestionBtn").classList.add("show");
-  $("questionCard").classList.add("correct-state");
-  $("progressBar").style.width=`${((state.currentIndex+1)/state.quizQuestions.length)*100}%`;
 
-  renderScoreboard();
-  $("turnScore").textContent=`${state.teams[state.currentTeam].score} POINTS`;
+  playTone("steal");
+  toast(`Question passed to ${nextTeam.name}.`);
 
-  playTone("correct");
-  confettiBurst(90);
-  toast(`${team.name} gets the point. Normal turn order continues.`);
+  // Keep the same question and all previously eliminated answers.
+  renderQuestion(true);
 }
-
 function selectAnswer(index,button){
   if(state.answered || button.disabled) return;
 
@@ -433,6 +476,7 @@ function selectAnswer(index,button){
 
   if(index!==q.correctAnswer){
     state.selectedWrong.add(index);
+    state.failedTeams.add(state.currentTeam);
     button.disabled=true;
     button.classList.add("wrong");
     $("questionCard").classList.remove("wrong-state");
@@ -443,11 +487,13 @@ function selectAnswer(index,button){
 
     showAnswerOverlay(
       "wrong",
-      "That answer is out. The original team can keep trying, or the host can hand the question to another team.",
+      "That answer is out. Keep trying with the remaining choices, or pass the question to another team.",
       "KEEP TRYING",
       ()=>hideAnswerOverlay(),
-      "OPEN TO OTHER TEAMS",
-      openSteal
+      "PASS IT TO ANOTHER TEAM",
+      openSteal,
+      "SKIP QUESTION",
+      skipQuestion
     );
     return;
   }
@@ -462,6 +508,7 @@ function selectAnswer(index,button){
   $("questionCard").classList.add("correct-state");
   $("feedback").innerHTML=`<div class="feedback-badge correct"><span class="checkmark">✓</span> CORRECT!</div>`;
   $("nextQuestionBtn").classList.add("show");
+  $("skipQuestionBtn").hidden=true;
   $("stealOpenBtn").hidden=true;
   $("progressBar").style.width=`${((state.currentIndex+1)/state.quizQuestions.length)*100}%`;
 
@@ -482,6 +529,33 @@ function selectAnswer(index,button){
     nextQuestion
   );
 }
+function skipQuestion(){
+  hideToast();
+  hideAnswerOverlay();
+  closeStealModal();
+  $("stealPanel").hidden=true;
+  $("stealOpenBtn").hidden=true;
+  state.answered=true;
+  state.wrongPhase=false;
+
+  if(state.currentIndex>=state.quizQuestions.length-1){
+    if(state.currentCategory){
+      state.completedCategories.add(state.currentCategory);
+      state.categoryPool[state.currentCategory]=[];
+    }
+    state.currentCategory=null;
+    state.quizQuestions=[];
+    state.currentIndex=0;
+    showCategorySelection();
+    return;
+  }
+
+  state.currentIndex++;
+  state.currentTeam=(state.currentTeam+1)%state.teams.length;
+  state.failedTeams=new Set();
+  renderQuestion(false);
+}
+
 function nextQuestion(){
   if(!state.answered) return;
 
@@ -507,7 +581,8 @@ function nextQuestion(){
 
   state.currentIndex++;
   state.currentTeam=(state.currentTeam+1)%state.teams.length;
-  renderQuestion();
+  state.failedTeams=new Set();
+  renderQuestion(false);
 }
 function showResults(){
   const ranking=[...state.teams].sort((a,b)=>b.score-a.score);
@@ -706,9 +781,10 @@ $("settingsBtn").onclick=()=>toast("Use the sound and fullscreen controls in the
 $("homeBtn").onclick=goHome;
 $("beginShowBtn").onclick=beginQuiz;
 $("nextQuestionBtn").onclick=nextQuestion;
+$("skipQuestionBtn").onclick=skipQuestion;
 $("quizExitBtn").onclick=goHome;
-$("closeStealBtn").onclick=()=>{
-  $("stealPanel").hidden=true;
+$("closeStealModalBtn").onclick=()=>{
+  closeStealModal();
   state.wrongPhase=false;
 };
 $("playAgainBtn").onclick=()=>{renderTeamInputs();renderQuestionCounts();showScreen("setupScreen");};
