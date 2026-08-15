@@ -1337,3 +1337,210 @@ main{
     touch-action:pan-y !important;
   }
 }
+
+/* =========================================================
+   iPad steal opportunity scroll — root layout fix
+   The quiz screen becomes the scroll container on iPad.
+   Desktop behaviour is unchanged.
+   ========================================================= */
+@media (min-width:768px) and (max-width:1100px){
+  #quizScreen{
+    display:block !important;
+    height:100% !important;
+    max-height:none !important;
+    min-height:100% !important;
+    overflow-y:auto !important;
+    overflow-x:hidden !important;
+    -webkit-overflow-scrolling:touch !important;
+    overscroll-behavior-y:contain !important;
+    touch-action:pan-y !important;
+    padding-bottom:40px !important;
+  }
+
+  #quizScreen .quiz-head,
+  #quizScreen .turn-banner,
+  #quizScreen .quiz-layout{
+    width:100% !important;
+    max-width:1120px !important;
+  }
+
+  #quizScreen .quiz-head{
+    margin-bottom:8px !important;
+  }
+
+  #quizScreen .turn-banner{
+    margin-bottom:10px !important;
+  }
+
+  #quizScreen .quiz-layout{
+    display:grid !important;
+    height:auto !important;
+    min-height:0 !important;
+    grid-template-rows:none !important;
+    overflow:visible !important;
+  }
+
+  #quizScreen .question-panel{
+    height:auto !important;
+    min-height:0 !important;
+    overflow:visible !important;
+  }
+
+  #quizScreen .question-card{
+    height:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
+    overflow:visible !important;
+  }
+
+  #quizScreen .steal-panel{
+    overflow:visible !important;
+    max-height:none !important;
+  }
+
+  #quizScreen .steal-team-grid{
+    overflow:visible !important;
+    max-height:none !important;
+  }
+}
+
+/* Portrait iPad uses the same outer scrolling model. */
+@media (min-width:768px) and (max-width:899px){
+  #quizScreen{
+    display:block !important;
+    overflow-y:auto !important;
+    height:100% !important;
+    max-height:none !important;
+  }
+
+  #quizScreen .quiz-head,
+  #quizScreen .turn-banner,
+  #quizScreen .quiz-layout{
+    height:auto !important;
+  }
+
+  #quizScreen .quiz-layout{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:8px !important;
+  }
+
+  #quizScreen .question-panel,
+  #quizScreen .question-card{
+    height:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
+  }
+}
+
+/* =========================================================
+   FINAL iPad quiz scrolling fix
+   The quiz screen itself is the scroll container.
+   This supersedes earlier iPad height/overflow rules.
+   ========================================================= */
+@media (min-width:768px) and (max-width:1100px){
+  #quizScreen{
+    position:absolute !important;
+    top:0 !important;
+    right:0 !important;
+    bottom:0 !important;
+    left:0 !important;
+
+    display:block !important;
+
+    width:100% !important;
+    height:calc(100dvh - 68px) !important;
+    min-height:0 !important;
+    max-height:none !important;
+
+    overflow-y:scroll !important;
+    overflow-x:hidden !important;
+
+    -webkit-overflow-scrolling:touch !important;
+    overscroll-behavior-y:contain !important;
+    touch-action:auto !important;
+
+    box-sizing:border-box !important;
+  }
+
+  #quizScreen .quiz-head{
+    display:grid !important;
+    width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+  }
+
+  #quizScreen .turn-banner{
+    height:auto !important;
+    min-height:54px !important;
+    flex:none !important;
+  }
+
+  #quizScreen .quiz-layout{
+    display:grid !important;
+    width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
+    overflow:visible !important;
+    align-items:start !important;
+  }
+
+  #quizScreen .question-panel{
+    display:block !important;
+    width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
+    overflow:visible !important;
+  }
+
+  #quizScreen .question-card{
+    display:block !important;
+    width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
+    overflow:visible !important;
+    box-sizing:border-box !important;
+  }
+
+  #quizScreen .steal-panel{
+    display:block !important;
+    width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
+    overflow:visible !important;
+    box-sizing:border-box !important;
+  }
+
+  #quizScreen .steal-team-grid{
+    display:grid !important;
+    height:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
+    overflow:visible !important;
+  }
+}
+
+@media (min-width:768px) and (max-width:899px){
+  #quizScreen{
+    height:calc(100dvh - 68px) !important;
+    overflow-y:scroll !important;
+  }
+
+  #quizScreen .quiz-head,
+  #quizScreen .turn-banner,
+  #quizScreen .quiz-layout{
+    height:auto !important;
+  }
+
+  #quizScreen .quiz-layout{
+    grid-template-columns:1fr !important;
+  }
+
+  #quizScreen .question-card{
+    height:auto !important;
+  }
+}

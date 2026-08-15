@@ -402,9 +402,12 @@ function openSteal(){
   playTone("steal");
 
   if(window.matchMedia("(min-width:768px) and (max-width:1100px)").matches){
-    $("questionCard").scrollTo({
-      top: $("questionCard").scrollHeight,
-      behavior: "smooth"
+    requestAnimationFrame(()=>{
+      const screen=$("quizScreen");
+      screen.scrollTo({
+        top:screen.scrollHeight,
+        behavior:"smooth"
+      });
     });
   }
 }
